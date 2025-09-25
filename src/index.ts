@@ -34,10 +34,7 @@ const PORT = 6040;
 app.use(
   cors({
     credentials: true,
-    origin: [
-      "http://localhost:3000", // local dev
-      "https://ekemazon.vercel.app", // production frontend
-    ],
+    origin: ["http://localhost:3000", "https://ekemazon.vercel.app"],
   })
 );
 
