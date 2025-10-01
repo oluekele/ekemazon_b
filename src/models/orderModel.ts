@@ -4,8 +4,8 @@ import {
   prop,
   Ref,
 } from "@typegoose/typegoose";
-import { Product } from "./productModel.js";
-import { User } from "./userModel.js";
+import { Product } from "./productModel";
+import { User } from "./userModel";
 
 class ShippingAddress {
   @prop()

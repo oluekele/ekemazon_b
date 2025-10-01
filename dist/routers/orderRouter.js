@@ -1,15 +1,22 @@
-import express from "express";
-import expressAsyncHandler from "express-async-handler";
-import { isAuth } from "../utils/generate.js";
-import { OrderModel } from "../models/orderModel.js";
-export const orderRouter = express.Router();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.orderRouter = void 0;
+const express_1 = __importDefault(require("express"));
+const express_async_handler_1 = __importDefault(require("express-async-handler"));
+const generate_1 = require("../utils/generate");
+const orderModel_1 = require("../models/orderModel");
+exports.orderRouter = express_1.default.Router();
 // Get all orders for the authenticated user (user order history)
 // orderRouter.get("/mine", isAuth, async (req: Request, res: Response) => {
 //   const orders = await OrderModel.find({ user: req.user?._id });
 //   res.send(orders);
 // });
-orderRouter.get("/mine", isAuth, expressAsyncHandler(async (req, res) => {
-    const orders = await OrderModel.find({ user: req.user?._id });
+exports.orderRouter.get("/mine", generate_1.isAuth, (0, express_async_handler_1.default)(async (req, res) => {
+    var _a;
+    const orders = await orderModel_1.OrderModel.find({ user: (_a = req.user) === null || _a === void 0 ? void 0 : _a._id });
     res.send(orders);
 }));
 // orderRouter.get(
@@ -25,8 +32,8 @@ orderRouter.get("/mine", isAuth, expressAsyncHandler(async (req, res) => {
 //     }
 //   })
 // );
-orderRouter.get("/:id", isAuth, expressAsyncHandler(async (req, res) => {
-    const order = await OrderModel.findById(req.params.id);
+exports.orderRouter.get("/:id", generate_1.isAuth, (0, express_async_handler_1.default)(async (req, res) => {
+    const order = await orderModel_1.OrderModel.findById(req.params.id);
     if (order) {
         res.json(order);
     }
@@ -34,12 +41,13 @@ orderRouter.get("/:id", isAuth, expressAsyncHandler(async (req, res) => {
         res.status(404).json({ message: "Order Not Found" });
     }
 }));
-orderRouter.post("/", isAuth, expressAsyncHandler(async (req, res) => {
+exports.orderRouter.post("/", generate_1.isAuth, (0, express_async_handler_1.default)(async (req, res) => {
+    var _a;
     if (req.body.orderItems.length === 0) {
         res.status(400).json({ message: "Cart is empty" });
     }
     else {
-        const createdOrder = await OrderModel.create({
+        const createdOrder = await orderModel_1.OrderModel.create({
             orderItems: req.body.orderItems.map((x) => ({
                 ...x,
                 product: x._id,
@@ -50,13 +58,13 @@ orderRouter.post("/", isAuth, expressAsyncHandler(async (req, res) => {
             shippingPrice: req.body.shippingPrice,
             taxPrice: req.body.taxPrice,
             totalPrice: req.body.totalPrice,
-            user: req.user?._id,
+            user: (_a = req.user) === null || _a === void 0 ? void 0 : _a._id,
         });
         res.status(201).json({ message: "Order Creade", order: createdOrder });
     }
 }));
-orderRouter.put("/:id/pay", isAuth, expressAsyncHandler(async (req, res) => {
-    const order = await OrderModel.findById(req.params.id).populate("user");
+exports.orderRouter.put("/:id/pay", generate_1.isAuth, (0, express_async_handler_1.default)(async (req, res) => {
+    const order = await orderModel_1.OrderModel.findById(req.params.id).populate("user");
     if (order) {
         order.isPaid = true;
         order.paidAt = new Date(Date.now());

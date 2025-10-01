@@ -5,12 +5,11 @@
     "outDir": "dist",
 
     /* Environment Settings */
-    "module": "NodeNext",
-    "target": "ES2022",
-    "moduleResolution": "NodeNext",
-
+    "module": "commonjs",
+    "target": "es2019",
+    // "moduleResolution": "node10",
     /* Node types */
-    "types": ["node"],
+    // "types": ["node"],
 
     /* Outputs */
     "sourceMap": true,
@@ -29,6 +28,10 @@
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["src", "types"],
+  "ts-node": {
+    "esm": true
+  },
+
+  "include": ["src", "src/types"],
   "exclude": ["node_modules", "dist"]
 }

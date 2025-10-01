@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
-import { ProductModel } from "../models/productModel.js";
-import { sampleProducts, sampleUsers } from "../data.js";
-import { UserModel } from "../models/userModel.js";
+import { ProductModel } from "../models/productModel";
+import { sampleProducts, sampleUsers } from "../data";
+import { UserModel } from "../models/userModel";
 
 export const seedRouter = express.Router();
 

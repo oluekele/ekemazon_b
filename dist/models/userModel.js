@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,33 +8,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { getModelForClass, ModelOptions, prop } from "@typegoose/typegoose";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserModel = exports.User = void 0;
+const typegoose_1 = require("@typegoose/typegoose");
 let User = class User {
-    _id;
-    name;
-    email;
-    password;
-    isAdmin;
 };
+exports.User = User;
 __decorate([
-    prop({ required: true }),
+    (0, typegoose_1.prop)({ required: true }),
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
 __decorate([
-    prop({ required: true, unique: true }),
+    (0, typegoose_1.prop)({ required: true, unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    prop({ required: true }),
+    (0, typegoose_1.prop)({ required: true }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    prop({ required: true, default: false }),
+    (0, typegoose_1.prop)({ required: true, default: false }),
     __metadata("design:type", Boolean)
 ], User.prototype, "isAdmin", void 0);
-User = __decorate([
-    ModelOptions({ schemaOptions: { timestamps: true } })
+exports.User = User = __decorate([
+    (0, typegoose_1.ModelOptions)({ schemaOptions: { timestamps: true } })
 ], User);
-export { User };
-export const UserModel = getModelForClass(User);
+exports.UserModel = (0, typegoose_1.getModelForClass)(User);
 //# sourceMappingURL=userModel.js.map

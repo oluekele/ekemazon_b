@@ -1,5 +1,11 @@
-import bcrypt from "bcryptjs";
-export const sampleProducts = [
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.sampleUsers = exports.sampleProducts = void 0;
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
+exports.sampleProducts = [
     {
         name: "Nike Slim shirt",
         slug: "nike-slim-shirt",
@@ -61,17 +67,17 @@ export const sampleProducts = [
         description: "high quality shirt",
     },
 ];
-export const sampleUsers = [
+exports.sampleUsers = [
     {
         name: "Joe",
         email: "admin@example.com",
-        password: bcrypt.hashSync("123456"),
+        password: bcryptjs_1.default.hashSync("123456"),
         isAdmin: true,
     },
     {
         name: "John",
         email: "user@example.com",
-        password: bcrypt.hashSync("123456"),
+        password: bcryptjs_1.default.hashSync("123456"),
         isAdmin: false,
     },
 ];
