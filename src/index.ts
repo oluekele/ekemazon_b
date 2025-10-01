@@ -40,7 +40,9 @@ app.use(
 
 app.use(express());
 app.use(express.urlencoded({ extended: true }));
-
+app.get("/", (req, res) => {
+  res.status(201).json("Welcome to ekemazon");
+});
 app.use("/api/products", productRouter);
 app.use("/api/seed", seedRouter);
 app.use("/api/users", userRouter);
