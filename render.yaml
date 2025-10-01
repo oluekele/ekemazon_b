@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ecommerce-backend
+    runtime: node
+    region: oregon # pick your region (oregon, frankfurt, singapore, etc.)
+    plan: free # free / starter / standard
+    buildCommand: "npm run build"
+    startCommand: "npm start"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false # you’ll set this in Render dashboard
+      - key: JWT_SECRET
+        sync: false # you’ll set this in Render dashboard
