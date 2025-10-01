@@ -5,5 +5,5 @@ export declare class User {
     password: string;
     isAdmin: boolean;
 }
-export declare const UserModel: import("@typegoose/typegoose").ReturnModelType<typeof User, import("@typegoose/typegoose/lib/types.js").BeAnObject>;
+export declare const UserModel: import("@typegoose/typegoose").ReturnModelType<typeof User, import("@typegoose/typegoose/lib/types").BeAnObject>;
 //# sourceMappingURL=userModel.d.ts.map

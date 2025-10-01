@@ -11,5 +11,5 @@ export declare class Product {
     numReviews: number;
     rating: number;
 }
-export declare const ProductModel: import("@typegoose/typegoose").ReturnModelType<typeof Product, import("@typegoose/typegoose/lib/types.js").BeAnObject>;
+export declare const ProductModel: import("@typegoose/typegoose").ReturnModelType<typeof Product, import("@typegoose/typegoose/lib/types").BeAnObject>;
 //# sourceMappingURL=productModel.d.ts.map

@@ -2,11 +2,11 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import { productRouter } from "./routers/productRouter.js";
-import { seedRouter } from "./routers/seedRouter.js";
-import { userRouter } from "./routers/userRouter.js";
-import { orderRouter } from "./routers/orderRouter.js";
-import { keyRouter } from "./routers/keyRouter.js";
+import { productRouter } from "./routers/productRouter";
+import { seedRouter } from "./routers/seedRouter";
+import { userRouter } from "./routers/userRouter";
+import { orderRouter } from "./routers/orderRouter";
+import { keyRouter } from "./routers/keyRouter";
 
 dotenv.config();
 
@@ -38,7 +38,7 @@ app.use(
   })
 );
 
-app.use(express.json());
+app.use(express());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/products", productRouter);

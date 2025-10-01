@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
-import { isAuth } from "../utils/generate.js";
-import { OrderModel } from "../models/orderModel.js";
-import { Product } from "../models/productModel.js";
+import { isAuth } from "../utils/generate";
+import { OrderModel } from "../models/orderModel";
+import { Product } from "../models/productModel";
+import { AuthRequest } from "../types/express";
 
 export const orderRouter = express.Router();
 
@@ -15,7 +16,7 @@ export const orderRouter = express.Router();
 orderRouter.get(
   "/mine",
   isAuth,
-  expressAsyncHandler(async (req: Request, res: Response) => {
+  expressAsyncHandler(async (req: AuthRequest, res: Response) => {
     const orders = await OrderModel.find({ user: req.user?._id });
     res.send(orders);
   })
@@ -51,7 +52,7 @@ orderRouter.get(
 orderRouter.post(
   "/",
   isAuth,
-  expressAsyncHandler(async (req: Request, res: Response) => {
+  expressAsyncHandler(async (req: AuthRequest, res: Response) => {
     if (req.body.orderItems.length === 0) {
       res.status(400).json({ message: "Cart is empty" });
     } else {

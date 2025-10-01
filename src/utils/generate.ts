@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { User } from "../models/userModel.js";
+import { AuthRequest } from "../types/express";
+
 import jwt from "jsonwebtoken";
+import { User } from "../models/userModel";
 
 export const generateToken = (user: User) => {
   return jwt.sign(
@@ -17,49 +19,25 @@ export const generateToken = (user: User) => {
   );
 };
 
-export const isAuth = (req: Request, res: Response, next: NextFunction) => {
+export const isAuth = (req: AuthRequest, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
+
   if (authorization) {
-    const token = authorization.slice(7, authorization.length);
-    const decode = jwt.verify(
-      token,
-      process.env.JWT_SECRET || "somethingsecret"
-    );
-    req.user = decode as {
-      _id: string;
-      name: string;
-      email: string;
-      isAdmin: boolean;
-      token: string;
-    };
-    console.log(req.user.token);
-    next();
+    const token = authorization.slice(7); // remove "Bearer "
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret") as {
+        _id: string;
+        name: string;
+        email: string;
+        isAdmin: boolean;
+      };
+
+      req.user = { ...decoded, token }; // ✅ no TS error
+      next();
+    } catch {
+      res.status(401).json({ message: "Invalid token" });
+    }
   } else {
     res.status(401).json({ message: "No token" });
   }
 };
-
-// export const isAuth = (req: Request, res: Response, next: NextFunction) => {
-//   const { authorization } = req.headers;
-//   if (authorization) {
-//     const token = authorization.slice(7); // remove "Bearer "
-//     try {
-//       const decode = jwt.verify(
-//         token,
-//         process.env.JWT_SECRET || "somethingsecret" // ✅ fixed
-//       );
-//       req.user = decode as {
-//         _id: string;
-//         name: string;
-//         email: string;
-//         isAdmin: boolean;
-//         token: string;
-//       };
-//       next();
-//     } catch (err) {
-//       res.status(401).json({ message: "Invalid token" });
-//     }
-//   } else {
-//     res.status(401).json({ message: "No token" });
-//   }
-// };
