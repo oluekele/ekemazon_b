@@ -31,10 +31,12 @@ const connectDB = async () => {
 const app = express();
 const PORT = process.env.PORT || 6040;
 
+const local = "http://localhost:3000";
+const server = "https://ekemazon.vercel.app";
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000", "https://ekemazon.vercel.app"],
+    origin: [server, local],
   })
 );
 
