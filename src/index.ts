@@ -40,7 +40,7 @@ app.use(
   })
 );
 
-app.use(express());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.status(201).json("Welcome to ekemazon");
